@@ -1,6 +1,7 @@
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 @EndUserText.label: 'Travel BO projection'
 @Metadata.ignorePropagatedAnnotations: false
+@Metadata.allowExtensions: true
 define root view entity zhar_travel_processor as projection on zhar_r_tavel
 {
     key TravelId,
@@ -17,6 +18,10 @@ define root view entity zhar_travel_processor as projection on zhar_r_tavel
     CreatedAt,
     LastChangedBy,
     LastChangedAt,
+    CustomerName,
+    AgencyName,
+    status_code,
+    OverallStatusText,
     /* Associations */
     _Agency,
     _Booking : redirected to composition child zhar_booking_processor,

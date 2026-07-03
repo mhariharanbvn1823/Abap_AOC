@@ -12,10 +12,14 @@ $projection.CurrencyCode = _Currency.Currency
 association of one to one /DMO/I_Overall_Status_VH as _overallStatus on
 $projection.OverallStatus = _overallStatus.OverallStatus
 {
-    
+   @ObjectModel.text.element: [ 'Description' ]
    key travel_id as TravelId,
+   @ObjectModel.text.element: [ 'AgencyName' ]
    agency_id as AgencyId,
+   _Agency.Name as AgencyName,
+   @ObjectModel.text.element: [ 'CustomerName' ]
    customer_id as CustomerId,
+   concat( _Customer.FirstName , _Customer.LastName ) as CustomerName,
    begin_date as BeginDate,
    end_date as EndDate,
    @Semantics.amount.currencyCode: 'CurrencyCode'
@@ -24,9 +28,16 @@ $projection.OverallStatus = _overallStatus.OverallStatus
    total_price as TotalPrice,
    currency_code as CurrencyCode,
    description as Description,
+   @ObjectModel.text.element: [ 'OverallStatusText' ]
    overall_status as OverallStatus,
+   _overallStatus._Text[ Language = $session.system_language ].Text as OverallStatusText,
    @Semantics.user.createdBy: true
    created_by as CreatedBy,
+   case overall_status
+    when 'O' then 2
+    when 'A' then 3
+    when 'X' then 1
+         end as status_code,
    @Semantics.systemDateTime.createdAt: true
    created_at as CreatedAt,
    @Semantics.user.lastChangedBy: true

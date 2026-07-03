@@ -1,6 +1,7 @@
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 @EndUserText.label: 'Booking entity projection'
 @Metadata.ignorePropagatedAnnotations: false
+@Metadata.allowExtensions: true
 define view entity zhar_booking_processor as projection on zhar_cds_booking
 {
     key TravelId,
