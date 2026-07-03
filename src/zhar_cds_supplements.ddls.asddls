@@ -7,10 +7,10 @@ association to parent zhar_cds_booking as _Booking
     $projection.BookingId = _Booking.BookingId 
 association of one to one zhar_r_tavel as _Travel on
      $projection.TravelId = _Travel.TravelId
-association of one to one /dmo/supplement as _Supplement on
-     $projection.SupplementId = _Supplement .supplement_id
-association of one to many /dmo/suppl_text as _SupplementText on
-     $projection.SupplementId = _SupplementText.supplement_id
+association of one to one /DMO/I_Supplement as _Supplement on
+     $projection.SupplementId = _Supplement.SupplementID
+association of one to many /DMO/I_SupplementText as _SupplementText on
+     $projection.SupplementId = _SupplementText.SupplementID
 {
     key /dmo/booksuppl_m.travel_id as TravelId,
     key /dmo/booksuppl_m.booking_id as BookingId,
@@ -19,7 +19,7 @@ association of one to many /dmo/suppl_text as _SupplementText on
     @Semantics.amount.currencyCode: 'CurrencyCode'
     /dmo/booksuppl_m.price as Price,
     /dmo/booksuppl_m.currency_code as CurrencyCode,
-    @Semantics.user.lastChangedBy: true
+    @Semantics.systemDateTime.lastChangedAt: true
     /dmo/booksuppl_m.last_changed_at as LastChangedAt,
    _Booking,
    _Travel,

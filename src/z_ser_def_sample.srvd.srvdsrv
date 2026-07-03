@@ -1,0 +1,4 @@
+@EndUserText.label: 'sample_service for checking'
+define service Z_ser_def_sample {
+  expose /DMO/I_Connection;
+}
