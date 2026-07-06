@@ -15,9 +15,19 @@ $projection.OverallStatus = _overallStatus.OverallStatus
    @ObjectModel.text.element: [ 'Description' ]
    key travel_id as TravelId,
    @ObjectModel.text.element: [ 'AgencyName' ]
+   @Consumption.valueHelpDefinition: [{ 
+            entity : { 
+                name: '/DMO/I_Agency',
+                element: 'AgencyID'
+            }   }]
    agency_id as AgencyId,
    _Agency.Name as AgencyName,
    @ObjectModel.text.element: [ 'CustomerName' ]
+      @Consumption.valueHelpDefinition: [{ 
+            entity : { 
+                name: '/DMO/I_Customer',
+                element: 'CustomerID'
+            }   }]
    customer_id as CustomerId,
    concat( _Customer.FirstName , _Customer.LastName ) as CustomerName,
    begin_date as BeginDate,
@@ -29,6 +39,11 @@ $projection.OverallStatus = _overallStatus.OverallStatus
    currency_code as CurrencyCode,
    description as Description,
    @ObjectModel.text.element: [ 'OverallStatusText' ]
+      @Consumption.valueHelpDefinition: [{ 
+            entity : { 
+                name: '/DMO/I_Overall_Status_VH',
+                element: 'OverallStatus'
+            }   }]
    overall_status as OverallStatus,
    _overallStatus._Text[ Language = $session.system_language ].Text as OverallStatusText,
    @Semantics.user.createdBy: true
