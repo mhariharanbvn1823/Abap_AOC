@@ -1,0 +1,52 @@
+// Managed tell Rap that developer needs RAP to create most of the code automatically
+managed
+// implementation allows developer to plug in some extra code
+implementation in class zbp_har_r_tavel unique;
+// allows the RAP to check the code/ syntax strictly
+strict ( 2 );
+
+define behavior for zhar_r_tavel alias Travel
+// persistant table - tells which table we need to do CRUD operation in DB
+persistent table /dmo/travel
+// lock to not edit parallely , if parent locked , all childs are alos locked
+lock master
+// -----must implentation coding by developer
+authorization master ( instance )
+// this to tell framework whether data is changed meanwhile or not
+etag master LastChangedAt
+{
+  create ;
+  update;
+  delete;
+// static feature control
+//  field ( readonly ) TravelId;
+// tells cannot create booking without tavel entity
+  association _Booking { create; }
+}
+
+define behavior for zhar_cds_booking alias Booking
+persistent table /dmo/booking_m
+lock dependent by _Travel
+//if parent pass allow me
+authorization dependent by _Travel
+etag master LastChangedAt // complusory or otherwise RAP fails
+{
+  update;
+  delete;
+  field ( readonly ) TravelId;
+  association _Travel;
+  association _Supplements { create; }
+}
+
+define behavior for zhar_cds_supplements alias BookSuppl
+persistent table /dmo/booksuppl_m
+lock dependent by _Travel
+authorization dependent by _Travel
+etag master LastChangedAt
+{
+  update;
+  delete;
+  field ( readonly ) TravelId, BookingId;
+  association _Travel;
+  association _Booking;
+}
