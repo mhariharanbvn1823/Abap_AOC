@@ -1,0 +1,29 @@
+projection;
+strict ( 2 );
+
+define behavior for zhar_travel_processor alias Travel
+{
+  use create;
+  use update;
+  use delete;
+
+  use association _Booking { create; }
+}
+
+define behavior for zhar_booking_processor alias Booking
+{
+  use update;
+  use delete;
+
+  use association _Travel;
+  use association _Supplements { create; }
+}
+
+define behavior for zhar_supplemnt_processor alias BookSuppl
+{
+  use update;
+  use delete;
+
+  use association _Travel;
+  use association _Booking;
+}

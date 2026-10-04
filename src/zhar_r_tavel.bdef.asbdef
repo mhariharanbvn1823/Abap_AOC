@@ -7,7 +7,7 @@ strict ( 2 );
 
 define behavior for zhar_r_tavel alias Travel
 // persistant table - tells which table we need to do CRUD operation in DB
-persistent table /dmo/travel
+persistent table /dmo/travel_m
 // lock to not edit parallely , if parent locked , all childs are alos locked
 lock master
 // -----must implentation coding by developer
@@ -22,6 +22,23 @@ etag master LastChangedAt
 //  field ( readonly ) TravelId;
 // tells cannot create booking without tavel entity
   association _Booking { create; }
+  mapping for /dmo/travel_m {
+    TravelId = travel_id;
+    AgencyId = agency_id;
+    CustomerId = customer_id;
+    BeginDate = begin_date ;
+    EndDate = end_date;
+    BookingFee = booking_fee ;
+    TotalPrice = total_price;
+    CurrencyCode = currency_code;
+    Description = description;
+    OverallStatus = overall_status ;
+    CreatedBy = created_by;
+    CreatedAt = created_at;
+    LastChangedBy = last_changed_by;
+    LastChangedAt = last_changed_at;
+
+  }
 }
 
 define behavior for zhar_cds_booking alias Booking

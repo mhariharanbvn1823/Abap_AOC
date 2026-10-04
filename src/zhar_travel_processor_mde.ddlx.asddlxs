@@ -11,40 +11,52 @@ annotate entity zhar_travel_processor
     @UI.facet: [
             
             { purpose : #HEADER,
-              type : #FIELDGROUP_REFERENCE,
-              id : 'HeaderTotalprice',
-              targetQualifier: 'HeaderDatas',
-              label: 'QuickView'  
-              
+              type : #DATAPOINT_REFERENCE,
+              targetQualifier: 'Header1',
+              position: 10
+            },
+            { purpose : #HEADER,
+              type : #DATAPOINT_REFERENCE,
+              targetQualifier: 'Header2',
+              position: 20
             },
             { purpose : #STANDARD,
               type : #COLLECTION,
-              id : 'Tabstrip_Holder1',
+              id : 'Tabstrip1',
               label: 'General Information',
               position: 10             
             },
             { purpose : #STANDARD,
               type : #COLLECTION,
-              id : 'Tabstrip_Holder2',
-              label: 'Additional DataTab1',
-              position: 20             
+              id : 'Tabstrip2',
+              label: 'Additional Data 1',
+              position: 20            
             },
+            
             { 
                 purpose: #STANDARD,
                 type:  #IDENTIFICATION_REFERENCE,
                 position: 10,
-                parentId: 'Tabstrip_Holder1',
+                parentId: 'Tabstrip1',
                 label: 'Basic Data',
-                targetQualifier: 'Tabstrip1_Box1'
+                targetQualifier: 'strip1_ref1'  
+               
                 
+            },
+            { 
+                purpose: #STANDARD,
+                type :#FIELDGROUP_REFERENCE,
+                position : 10 ,
+                targetQualifier: 'strip2_ref1',
+                parentId: 'Tabstrip2'          
             },
             { 
                 purpose: #STANDARD,
                 type:  #FIELDGROUP_REFERENCE,
                 position: 20,
-                label: 'Important Dates',
-                parentId: 'Tabstrip_Holder1',
-               targetQualifier: 'Tabstrip1_Box2'
+                label: 'Travel status',
+                parentId: 'Tabstrip1',
+               targetQualifier: 'strip1_ref2'
             } 
 
     
@@ -53,31 +65,36 @@ annotate entity zhar_travel_processor
     @UI.selectionField: [{ position: 10 }]
     @UI.lineItem: [{ position: 10 }]
     @UI.fieldGroup: [{ label: 'MyTravelId' ,qualifier: 'HeaderDatas' ,position: 10 }]
-    @UI.identification: [{ position: 10 , qualifier: 'Tabstrip1_Box1' }]
+    @UI.identification: [{ position: 10 , qualifier: 'strip1_ref1' }]
+   
     TravelId;
      @UI.selectionField: [{ position: 20 }]
      @UI.lineItem: [{ position: 20 }]
-     @UI.identification: [{ position: 20 , qualifier: 'Tabstrip1_Box1' }]
+     @UI.identification: [{ position: 30 , qualifier: 'strip1_ref1' }]
     AgencyId;
      @UI.selectionField: [{ position: 30 }]
      @UI.lineItem: [{ position: 30 }]
+     @UI.identification: [{ position: 40 , qualifier: 'strip1_ref1' }]
     CustomerId;
     @UI.lineItem: [{ position: 40 }]
-    @UI.fieldGroup: [{ position: 10 , qualifier: 'Tabstrip1_Box2' }]
+    @UI.fieldGroup: [{ position: 10 , qualifier: 'strip1_ref2' ,label: 'Start Date' }]
     BeginDate;
-    @UI.fieldGroup: [{ position: 20 , qualifier: 'Tabstrip1_Box2' }]
+    @UI.fieldGroup: [{ position: 20 , qualifier: 'strip1_ref2' }]
     EndDate;
 //    BookingFee;
      @UI.selectionField: [{ position: 40 }]
      @UI.lineItem: [{ position: 50 }]
      @UI.fieldGroup: [{ label:  'Total Travel Expenses' ,qualifier: 'HeaderDatas',position: 20 }]
-    @UI.identification: [{ position: 30 , qualifier: 'Tabstrip2_Box1' }]
+    @UI.dataPoint : { qualifier: 'Header1' }
     TotalPrice;
 //    CurrencyCode;
-//    Description;
+  @UI.identification: [{ position: 20 , qualifier: 'strip1_ref1' }]
+   @UI.fieldGroup: [{ position: 10 , qualifier: 'strip2_ref1' }]
+    Description;
      @UI.selectionField: [{ position: 50 }]
      @UI.lineItem: [{ position: 60 , criticality: 'status_code' ,  importance: #HIGH }]
-    @UI.identification: [{ position: 40 , qualifier: 'Tabstrip2_Box1' }]
+    @UI.fieldGroup: [{ qualifier :'strip1_ref2' , position: 30 }]
+    @UI.dataPoint : {  qualifier: 'Header2' }
     OverallStatus;
 //    CreatedBy;
 //    CreatedAt;
