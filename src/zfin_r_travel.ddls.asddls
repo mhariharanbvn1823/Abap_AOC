@@ -2,7 +2,7 @@
 @EndUserText.label: 'Travel root entity'
 @Metadata.ignorePropagatedAnnotations: true
 define root view entity zfin_r_travel as select from /dmo/travel_m
-//composition of target_data_source_name as _association_name
+composition of exact one to many zfin_booking as _Booking
 association of one to one /DMO/I_Agency as _Agency on
     $projection.AgencyId = _Agency.AgencyID
     association of one to one /DMO/I_Customer as _Customer on
@@ -38,6 +38,7 @@ association of one to one /DMO/I_Agency as _Agency on
         _Agency,
         _Customer,
         _Currency,
-        _OverallStatus
+        _OverallStatus,
+        _Booking
         
 }
