@@ -13,9 +13,13 @@ association of one to one /DMO/I_Agency as _Agency on
     $projection.OverallStatus = _OverallStatus.OverallStatus
 
 {
-    
+        @ObjectModel.text.element: [ 'Description' ]
     key /dmo/travel_m.travel_id as TravelId,
+        _Agency.Name as AgencyName,
+        @ObjectModel.text.element: [ 'AgencyName' ]
         /dmo/travel_m.agency_id as AgencyId,
+        concat( concat( _Customer.FirstName , ' ') , _Customer.LastName ) as CustomerName,
+        @ObjectModel.text.element: [ 'CustomerName' ]
         /dmo/travel_m.customer_id as CustomerId,
         /dmo/travel_m.begin_date as BeginDate,
         /dmo/travel_m.end_date as EndDate,
@@ -25,6 +29,8 @@ association of one to one /DMO/I_Agency as _Agency on
         /dmo/travel_m.total_price as TotalPrice,
         /dmo/travel_m.currency_code as CurrencyCode,
         /dmo/travel_m.description as Description,
+        _OverallStatus._Text.Text as OverallStatusText,
+        @ObjectModel.text.element: [ 'OverallStatusText' ]
         /dmo/travel_m.overall_status as OverallStatus,
         @Semantics.user.createdBy: true
         /dmo/travel_m.created_by as CreatedBy,

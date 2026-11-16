@@ -1,0 +1,6 @@
+@EndUserText.label: 'Service definition for Travel Processor'
+define service Zfin_travel_proc_SD {
+  expose zfin_travel_processor    as Travel;
+  expose zfin_booking_processor   as Booking;
+  expose zfin_booksuppl_processor as BookSupplement;
+}
